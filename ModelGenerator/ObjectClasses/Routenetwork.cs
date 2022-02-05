@@ -14,20 +14,18 @@ namespace ModelGenerator
         protected string _idRouteNetworkcol;
         protected string _Width;
         protected string _Length;
-        protected List<Route> _routes;
+        protected List<SQLObject> _routes;
         #endregion
         #region Constructors
-        public Routenetwork(MySqlDataReader parentReader)
+        public Routenetwork(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            //...
+            //SetConnection
+            OpenConnection();
 
-            SetConnection();
-        }
-        public Routenetwork(string Width, string Length)
-        {
-            this._Width = Width;
-            this._Length = Length;
+            //Get Routes
+            ReadListProperties(ref _routes, typeof(Route), "SELECT * FROM route WHERE RouteNetwork_MaterialHandlingSystem_idMaterialHandlingSystem = " + _MaterialHandlingSystem_idMaterialHandlingSystem + " AND RouteNetwork_idRouteNetworkcol = " + _idRouteNetworkcol);
+
+            CloseConnection();
         }
         #endregion
         #region Public Properties
@@ -51,7 +49,7 @@ namespace ModelGenerator
             get { return _Length; }
             set { _Length = value; }
         }
-        public List<Route> Routes
+        public List<SQLObject> Routes
         {
             get { return _routes; }
             set { _routes = value; }

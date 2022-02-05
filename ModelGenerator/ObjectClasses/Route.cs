@@ -15,20 +15,18 @@ namespace ModelGenerator
         protected string _Width;
         protected string _RouteNetwork_MaterialHandlingSystem_idMaterialHandlingSystem;
         protected string _RouteNetwork_idRouteNetworkcol;
-        protected List<Travelingpoint> _travelingpoints;
+        protected List<SQLObject> _route_has_travelingpoint;
         #endregion
         #region Constructors
-        public Route(MySqlDataReader parentReader)
+        public Route(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            //...
+            //Set Connection
+            OpenConnection();
 
-            SetConnection();
-        }
-        public Route(string Length, string Width)
-        {
-            this._Length = Length;
-            this._Width = Width;
+            //Get traveling points
+            ReadListProperties(ref _route_has_travelingpoint, typeof(Route_has_travelingpoint), "SELECT * FROM route_has_travelingpoint WHERE route_idRoute = " + _idRoute);
+
+            CloseConnection();
         }
         #endregion
         #region Public Properties
@@ -57,10 +55,10 @@ namespace ModelGenerator
             get { return _RouteNetwork_idRouteNetworkcol; }
             set { _RouteNetwork_idRouteNetworkcol = value; }
         }
-        public List<Travelingpoint> Travelingpoints
+        public List<SQLObject> Route_has_travelingpoint
         {
-            get { return _travelingpoints; }
-            set { _travelingpoints = value; }
+            get { return _route_has_travelingpoint; }
+            set { _route_has_travelingpoint = value; }
         }
         #endregion
     }

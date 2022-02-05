@@ -16,36 +16,20 @@ namespace ModelGenerator
         protected string _ProcessingTime;
         protected string _idManufacturingSystem;
         protected string _TravelingPoint_idTravelingPoint;
-        protected List<Queue> _queues;
+        protected List<SQLObject> _queues;
         #endregion
         #region Constructors
-        public Machine(MySqlDataReader parentReader)
+        public Machine(MySqlDataReader parentReader):base(parentReader)
         {
-            //Get local properties
-            _idMachine = GetString(parentReader, "idMachine");
-            _Capacity = GetString(parentReader, "Capacity");
-            _Type = GetString(parentReader, "Type");
-            _ProcessingTime = GetString(parentReader, "ProcessingTime");
-            _idManufacturingSystem = GetString(parentReader, "idManufacturingSystem");
-            _TravelingPoint_idTravelingPoint = GetString(parentReader, "TravelingPoint_idTravelingPoint");
-            
             //Set Connection
-            SetConnection();
+            OpenConnection();
 
             //Get Queues
-            _queues = new List<Queue>();
-            command = new MySqlCommand("SELECT * FROM queue WHERE Machine_idMachine = " + _idMachine, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _queues.Add(new Queue(reader));
-            reader.Close();
+            ReadListProperties(ref _queues, typeof(Queue), "SELECT * FROM queue WHERE Machine_idMachine = " + _idMachine);
+           
+            CloseConnection();
         }
-        public Machine(string Capacity, string Type, string ProcessingTime)
-        {
-            this._Capacity = Capacity;
-            this._Type = Type;
-            this._ProcessingTime = ProcessingTime;
-        }
+
         #endregion
         #region Public Properties
         public string IdMachine
@@ -78,7 +62,7 @@ namespace ModelGenerator
             get { return _TravelingPoint_idTravelingPoint; }
             set { _TravelingPoint_idTravelingPoint = value; }
         }
-        public List<Queue> Queues
+        public List<SQLObject> Queues
         {
             get { return _queues; }
             set { _queues = value; }

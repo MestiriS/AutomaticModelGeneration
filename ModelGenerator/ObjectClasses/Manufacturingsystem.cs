@@ -12,25 +12,18 @@ namespace ModelGenerator
         #region Member Variables
         protected string _idManufacturingSystem;
         protected string _SimulationData_idSimulationData;
-        protected List<Machine> _machines;
+        protected List<SQLObject> _machines;
         #endregion
         #region Constructors
-        public Manufacturingsystem(MySqlDataReader parentReader)
+        public Manufacturingsystem(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            _idManufacturingSystem = GetString(parentReader, "idManufacturingSystem");
-            _SimulationData_idSimulationData = GetString(parentReader, "SimulationData_idSimulationData");
-
             //Set connection
-            SetConnection();
+            OpenConnection();
 
             //Get Machines
-            _machines = new List<Machine>();
-            command = new MySqlCommand("SELECT * FROM machine WHERE idManufacturingSystem = " + _idManufacturingSystem, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _machines.Add(new Machine(reader));
-            reader.Close();
+            ReadListProperties(ref _machines, typeof(Machine), "SELECT * FROM machine WHERE idManufacturingSystem = " + _idManufacturingSystem);
+
+            CloseConnection();
         }
         #endregion
         #region Public Properties
@@ -44,7 +37,7 @@ namespace ModelGenerator
             get { return _SimulationData_idSimulationData; }
             set { _SimulationData_idSimulationData = value; }
         }
-        public List<Machine> Machines
+        public List<SQLObject> Machines
         {
             get { return _machines; }
             set { _machines = value; }

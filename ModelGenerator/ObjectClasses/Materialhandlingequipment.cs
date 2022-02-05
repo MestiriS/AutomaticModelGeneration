@@ -17,55 +17,26 @@ namespace ModelGenerator
         protected string _InitialYLocation;
         protected string _MaterialHandlingSystem_idMaterialHandlingSystem;
         protected string _MaterialHandlingSystem_SimulationData_idSimulationData;
-        protected List<Packagingequipment> _packagingequipments;
-        protected List<Movingequipment> _movingequipments;
-        protected List<Storageequipment> _storageequipments;
+        protected List<SQLObject> _packagingequipments;
+        protected List<SQLObject> _movingequipments;
+        protected List<SQLObject> _storageequipments;
         #endregion
         #region Constructors
-        public Materialhandlingequipment(MySqlDataReader parentReader)
+        public Materialhandlingequipment(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            _idMaterialHandlingEquipment = GetString(parentReader, "idMaterialHandlingEquipment");
-            _Capacity = GetString(parentReader, "Capacity");
-            _Size = GetString(parentReader, "Size");
-            _InitialXLocation = GetString(parentReader, "InitialXLocation");
-            _InitialYLocation = GetString(parentReader, "InitialYLocation");
-            _MaterialHandlingSystem_idMaterialHandlingSystem = GetString(parentReader, "MaterialHandlingSystem_idMaterialHandlingSystem");
-            _MaterialHandlingSystem_SimulationData_idSimulationData = GetString(parentReader, "MaterialHandlingSystem_SimulationData_idSimulationData");
-
             //set connection
-            SetConnection();
+            OpenConnection();
 
             //Get material handling equipments
-            _packagingequipments = new List<Packagingequipment>();
-            command = new MySqlCommand("SELECT * FROM packagingequipment", connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _packagingequipments.Add(new Packagingequipment(reader));
-            reader.Close();
+            ReadListProperties(ref _packagingequipments, typeof(Packagingequipment), "SELECT * FROM packagingequipment");
 
             //Get moving equipments
-            _movingequipments = new List<Movingequipment>();
-            command = new MySqlCommand("SELECT * FROM movingequipment", connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _movingequipments.Add(new Movingequipment(reader));
-            reader.Close();
+            ReadListProperties(ref _movingequipments, typeof(Movingequipment), "SELECT * FROM movingequipment");
 
             //Get storage equipments
-            _storageequipments = new List<Storageequipment>();
-            command = new MySqlCommand("SELECT * FROM storageequipment", connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _storageequipments.Add(new Storageequipment(reader));
-            reader.Close();
-        }
-        public Materialhandlingequipment(string Capacity, string Size, string InitialXLocation, string InitialYLocation)
-        {
-            this._Capacity = Capacity;
-            this._Size = Size;
-            this._InitialXLocation = InitialXLocation;
-            this._InitialYLocation = InitialYLocation;
+            ReadListProperties(ref _storageequipments, typeof(Storageequipment), "SELECT * FROM storageequipment");
+
+            CloseConnection();
         }
         #endregion
         #region Public Properties
@@ -104,17 +75,17 @@ namespace ModelGenerator
             get { return _MaterialHandlingSystem_SimulationData_idSimulationData; }
             set { _MaterialHandlingSystem_SimulationData_idSimulationData = value; }
         }
-        public List<Packagingequipment> Packagingequipments
+        public List<SQLObject> Packagingequipments
         {
             get { return _packagingequipments; }
             set { _packagingequipments = value; }
         }
-        public List<Movingequipment> Movingequipments
+        public List<SQLObject> Movingequipments
         {
             get { return _movingequipments; }
             set { _movingequipments = value; }
         }
-        public List<Storageequipment> Storageequipments
+        public List<SQLObject> Storageequipments
         {
             get { return _storageequipments; }
             set { _storageequipments = value; }

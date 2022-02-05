@@ -15,15 +15,8 @@ namespace ModelGenerator
         protected string _idStorageEquipment;
         #endregion
         #region Constructors
-        public Storageequipment(MySqlDataReader parentReader)
+        public Storageequipment(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            _Type = GetString(parentReader, "Type");
-            _idStorageEquipment = GetString(parentReader, "idStorageEquipment");
-        }
-        public Storageequipment(string Type)
-        {
-            this._Type = Type;
         }
         #endregion
         #region Public Properties

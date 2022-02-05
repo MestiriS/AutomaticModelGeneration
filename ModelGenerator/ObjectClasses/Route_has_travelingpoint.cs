@@ -16,16 +16,8 @@ namespace ModelGenerator
         protected string _Direction;
         #endregion
         #region Constructors
-        public Route_has_travelingpoint(MySqlDataReader parentReader)
+        public Route_has_travelingpoint(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            //...
-
-            SetConnection();
-        }
-        public Route_has_travelingpoint(string Direction)
-        {
-            this._Direction = Direction;
         }
         #endregion
         #region Public Properties

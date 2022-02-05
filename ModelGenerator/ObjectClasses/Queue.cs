@@ -16,18 +16,8 @@ namespace ModelGenerator
         protected string _Machine_idMachine;
         #endregion
         #region Constructors
-        public Queue(MySqlDataReader parentReader)
+        public Queue(MySqlDataReader parentReader):base(parentReader)
         {
-            //Get local properties
-            _idQueue = GetString(parentReader, "idQueue");
-            _Capacity = GetString(parentReader, "Capacity");
-            _Type = GetString(parentReader, "Type");
-            _Machine_idMachine = GetString(parentReader, "Machine_idMachine");
-        }
-        public Queue(string Capacity,string Type)
-        {
-            this._Capacity = Capacity;
-            this._Type = Type;
         }
         #endregion
         #region Public Properties

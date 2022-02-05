@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,22 +19,10 @@ namespace ModelGenerator
         protected string _SimulationData_idSimulationData;
         #endregion
         #region Constructors
-        public Handlingunit(MySqlDataReader parentReader)
+        public Handlingunit(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            _idHandlingUnit = GetString(parentReader, "idHandlingUnit");
-            _MaterialType = GetString(parentReader, "MaterialType");
-            _ContainerCapacity = GetString(parentReader, "ContainerCapacity");
-            _ContainerSize = GetString(parentReader, "ContainerSize");
-            _ContainerType = GetString(parentReader, "ContainerType");
-            _SimulationData_idSimulationData = GetString(parentReader, "SimulationData_idSimulationData");
         }
-        public Handlingunit(string ContainerCapacity, string ContainerSize, string ContainerType)
-        {
-            this._ContainerCapacity = ContainerCapacity;
-            this._ContainerSize = ContainerSize;
-            this._ContainerType = ContainerType;
-        }
+
         #endregion
         #region Public Properties
         public virtual string IdHandlingUnit

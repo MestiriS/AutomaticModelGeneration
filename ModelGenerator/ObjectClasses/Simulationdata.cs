@@ -12,47 +12,27 @@ namespace ModelGenerator
     {
         #region Member Variables
         protected string _idSimulationData;
-        protected List<Handlingunit> _handlingunits;
-        protected List<Manufacturingsystem> _manufacturingsystems;
-        protected List<Materialhandlingsystem> _materialhandlingsystems;
+        protected List<SQLObject> _handlingunits;
+        protected List<SQLObject> _manufacturingsystems;
+        protected List<SQLObject> _materialhandlingsystems;
 
         #endregion
         #region Constructors
-        public Simulationdata() 
-        { 
-            
-        }
-        public Simulationdata(MySqlDataReader parentReader)
+        public Simulationdata(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            _idSimulationData = GetString(parentReader, "idSimulationData");
-            
             //Set connection
-            SetConnection();
+            OpenConnection();
 
             //Get handling units
-            _handlingunits = new List<Handlingunit>();
-            command = new MySqlCommand("SELECT * FROM handlingunit WHERE SimulationData_idSimulationData = " + _idSimulationData, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _handlingunits.Add(new Handlingunit(reader));
-            reader.Close();
+            ReadListProperties(ref _handlingunits, typeof(Handlingunit), "SELECT * FROM handlingunit WHERE SimulationData_idSimulationData = " + _idSimulationData);
 
             //Get manufacturing systems 
-            _manufacturingsystems = new List<Manufacturingsystem>();
-            command = new MySqlCommand("SELECT * FROM manufacturingsystem WHERE SimulationData_idSimulationData = " + _idSimulationData, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _manufacturingsystems.Add(new Manufacturingsystem(reader));
-            reader.Close();
+            ReadListProperties(ref _manufacturingsystems, typeof(Manufacturingsystem), "SELECT * FROM manufacturingsystem WHERE SimulationData_idSimulationData = " + _idSimulationData);
 
             //Get materialhandling systems 
-            _materialhandlingsystems = new List<Materialhandlingsystem>();
-            command = new MySqlCommand("SELECT * FROM materialhandlingsystem WHERE SimulationData_idSimulationData = " + _idSimulationData, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-                _materialhandlingsystems.Add(new Materialhandlingsystem(reader));
-            reader.Close();
+            ReadListProperties(ref _materialhandlingsystems, typeof(Materialhandlingsystem), "SELECT * FROM materialhandlingsystem WHERE SimulationData_idSimulationData = " + _idSimulationData);
+
+            CloseConnection();
         }
         #endregion
         #region Public Properties
@@ -62,17 +42,17 @@ namespace ModelGenerator
             set { _idSimulationData = value; }
         }
 
-        public List<Handlingunit> Handlingunits
+        public List<SQLObject> Handlingunits
         {
             get { return _handlingunits; }
             set { _handlingunits = value; }
         }
-        public List<Manufacturingsystem> Manufacturingsystems
+        public List<SQLObject> Manufacturingsystems
         {
             get { return _manufacturingsystems; }
             set { _manufacturingsystems = value; }
         }
-        public List<Materialhandlingsystem> Materialhandlingsystems
+        public List<SQLObject> Materialhandlingsystems
         {
             get { return _materialhandlingsystems; }
             set { _materialhandlingsystems = value; }

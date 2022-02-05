@@ -10,31 +10,29 @@ namespace ModelGenerator
     public class Travelingpoint : SQLObject
     {
         #region Member Variables
-        protected string _idTravelingPostring;
+        protected string _idTravelingPoint;
         protected string _Level;
         protected string _XLocation;
         protected string _YLocation;
+        protected List<SQLObject> _loadunloadactivities;
         #endregion
         #region Constructors
-        public Travelingpoint(MySqlDataReader parentReader)
+        public Travelingpoint(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            //...
+            //SetConnection
+            OpenConnection();
 
-            SetConnection();
-        }
-        public Travelingpoint(string Level, string XLocation, string YLocation)
-        {
-            this._Level = Level;
-            this._XLocation = XLocation;
-            this._YLocation = YLocation;
+            //Get load unload activities
+            ReadListProperties(ref _loadunloadactivities, typeof(Loadunloadactivity), "SELECT * FROM loadunloadactivity WHERE idTravelingPoint =" + _idTravelingPoint);
+
+            CloseConnection();
         }
         #endregion
         #region Public Properties
-        public virtual string IdTravelingPostring
+        public virtual string IdTravelingPoint
         {
-            get { return _idTravelingPostring; }
-            set { _idTravelingPostring = value; }
+            get { return _idTravelingPoint; }
+            set { _idTravelingPoint = value; }
         }
         public virtual string Level
         {
@@ -50,6 +48,11 @@ namespace ModelGenerator
         {
             get { return _YLocation; }
             set { _YLocation = value; }
+        }
+        public List<SQLObject> Loadunloadactivities
+        {
+            get { return _loadunloadactivities; }
+            set { _loadunloadactivities = value; }
         }
         #endregion
     }

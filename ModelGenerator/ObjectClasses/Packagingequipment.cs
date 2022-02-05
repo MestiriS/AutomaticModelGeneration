@@ -15,16 +15,8 @@ namespace ModelGenerator
         protected string _idPackagingEquipment;
         #endregion
         #region Constructors
-        public Packagingequipment(MySqlDataReader parentReader)
+        public Packagingequipment(MySqlDataReader parentReader) : base(parentReader)
         {
-            //Get local properties
-            _Type = GetString(parentReader, "_Type");
-            _ProcessingTime = GetString(parentReader, "ProcessingTime");
-            _idPackagingEquipment = GetString(parentReader, "idPackagingEquipment");
-        }
-        public Packagingequipment(string ProcessingTime)
-        {
-            this._ProcessingTime = ProcessingTime;
         }
         #endregion
         #region Public Properties
