@@ -1,0 +1,71 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ModelGenerator
+{
+    public class Handlingunit: SQLObject
+    {
+        #region Member Variables
+        protected string _idHandlingUnit;
+        protected string _MaterialType;
+        protected string _ContainerCapacity;
+        protected string _ContainerSize;
+        protected string _ContainerType;
+        protected string _SimulationData_idSimulationData;
+        #endregion
+        #region Constructors
+        public Handlingunit(MySqlDataReader parentReader)
+        {
+            //Get local properties
+            _idHandlingUnit = GetString(parentReader, "idHandlingUnit");
+            _MaterialType = GetString(parentReader, "MaterialType");
+            _ContainerCapacity = GetString(parentReader, "ContainerCapacity");
+            _ContainerSize = GetString(parentReader, "ContainerSize");
+            _ContainerType = GetString(parentReader, "ContainerType");
+            _SimulationData_idSimulationData = GetString(parentReader, "SimulationData_idSimulationData");
+        }
+        public Handlingunit(string ContainerCapacity, string ContainerSize, string ContainerType)
+        {
+            this._ContainerCapacity = ContainerCapacity;
+            this._ContainerSize = ContainerSize;
+            this._ContainerType = ContainerType;
+        }
+        #endregion
+        #region Public Properties
+        public virtual string IdHandlingUnit
+        {
+            get { return _idHandlingUnit; }
+            set { _idHandlingUnit = value; }
+        }
+        public virtual string MaterialType
+        {
+            get { return _MaterialType; }
+            set { _MaterialType = value; }
+        }
+        public virtual string ContainerCapacity
+        {
+            get { return _ContainerCapacity; }
+            set { _ContainerCapacity = value; }
+        }
+        public virtual string ContainerSize
+        {
+            get { return _ContainerSize; }
+            set { _ContainerSize = value; }
+        }
+        public virtual string ContainerType
+        {
+            get { return _ContainerType; }
+            set { _ContainerType = value; }
+        }
+        public virtual string SimulationData_idSimulationData
+        {
+            get { return _SimulationData_idSimulationData; }
+            set { _SimulationData_idSimulationData = value; }
+        }
+        #endregion
+    }
+}

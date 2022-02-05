@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\temp\\Arbeit\\Zakaraya\\GitHub\\AutomaticModelGeneration\\ModelGenerator\\ModelGenerator.csproj": {}
+  },
+  "projects": {
+    "C:\\temp\\Arbeit\\Zakaraya\\GitHub\\AutomaticModelGeneration\\ModelGenerator\\ModelGenerator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\temp\\Arbeit\\Zakaraya\\GitHub\\AutomaticModelGeneration\\ModelGenerator\\ModelGenerator.csproj",
+        "projectName": "ModelGenerator",
+        "projectPath": "C:\\temp\\Arbeit\\Zakaraya\\GitHub\\AutomaticModelGeneration\\ModelGenerator\\ModelGenerator.csproj",
+        "packagesPath": "C:\\Users\\ga75nop\\.nuget\\packages\\",
+        "outputPath": "C:\\temp\\Arbeit\\Zakaraya\\GitHub\\AutomaticModelGeneration\\ModelGenerator\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ga75nop\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0-windows7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0-windows7.0": {
+            "targetAlias": "net5.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.28, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
