@@ -15,9 +15,7 @@ namespace ModelGenerator
 {
     public partial class StartForm : Form
     {
-        DataSet Dataset;
-        MySqlDataAdapter DataAdapter;
-        MySqlConnection Connection;
+
         public StartForm()
         {
             InitializeComponent();
@@ -25,29 +23,16 @@ namespace ModelGenerator
         }
         private void ReadData()
         {
-            //Establish connection
-            Connection = new MySqlConnection("server=sql11.freesqldatabase.com;port=3306;database=sql11470136;Uid=sql11470136;Pwd=gZHghibljB");
-            try
-            {
-                Connection.Open();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            Project p = new Project(null);
+        }
 
+        private void ShowTable()
+        {
             //Test
-            DataAdapter = new MySqlDataAdapter("select * from queue", Connection);
+            /*DataAdapter = new MySqlDataAdapter("select * from queue", Connection);
             Dataset = new DataSet();
             DataAdapter.Fill(Dataset);
-            DGView.DataSource = Dataset.Tables[0];
-
-            MySqlCommand command = new MySqlCommand("Select * From simulationdata", Connection);
-            MySqlDataReader reader = command.ExecuteReader();
-            List<Simulationdata> ListSimulationData = new List<Simulationdata>();
-            while (reader.Read())
-                ListSimulationData.Add(new Simulationdata(reader));
-            
+            DGView.DataSource = Dataset.Tables[0];*/
         }
     }
 }

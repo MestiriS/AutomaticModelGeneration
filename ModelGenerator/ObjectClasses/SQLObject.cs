@@ -15,6 +15,8 @@ namespace ModelGenerator
         protected MySqlDataReader reader;
         public SQLObject(MySqlDataReader parentReader)
         {
+            if (parentReader == null)
+                return;
             //Get local properties
             GetLocalProperties(parentReader, this);
         }
@@ -65,7 +67,6 @@ namespace ModelGenerator
             while (reader.Read())
                 ObjectList.Add((SQLObject)Activator.CreateInstance(T, reader));
             reader.Close();
-
         }
     }
 }
